@@ -58,8 +58,8 @@ if kamer_2 == 1:
     print('Je stapt door de deur heen en je ziet een standbeeld voor je.')
     print('Het standbeeld heeft een rupee vast.')
     print('Op zijn borst zit een numpad met de toesten 9 t/m 0.')
-    vraag_1_input = int(input(f'Daarboven zie je een som staan {RANDOM_0} + {RANDOM_01} = ? '))
-    vraag_2_input = int(input(f'Daarboven zie je een som staan {RANDOM_1} - {RANDOM_10} = ? '))
+    vraag_1_input = int(input(f'Daarboven zie je een som staan {RANDOM_0} + {RANDOM_01} = ? {antwoord_1} '))
+    vraag_2_input = int(input(f'Daarboven zie je een som staan {RANDOM_1} - {RANDOM_10} = ? {antwoord_2} '))
     if vraag_1_input == antwoord_1 and vraag_2_input == antwoord_2:
         antaal_rupee += 1
         print(f'Je hebt nu {antaal_rupee} rupees')
@@ -206,7 +206,7 @@ if kamer_3 == 1:
     print('Die zijn wel te koop')
     print(f'Ik voel dat je {antaal_rupee} rupees hebt!')
     if antaal_rupee >= 3:
-        print('1 rupee voor elk van de items')
+        # print('1 rupee voor elk van de items')
         schild_zwaard = input('Wil je alle items kopen ').lower()
         if schild_zwaard == 'ja':
             sleutel += 1
@@ -215,7 +215,7 @@ if kamer_3 == 1:
             player_attack += 2
             antaal_rupee -= 1
     elif antaal_rupee == 2:
-        print('1 rupee voor elk van de items')
+        # print('1 rupee voor elk van de items')
         player_choios = input('welke itms wil je hebbe? ').lower()
         if player_choios == 'schild en zwaard':
             player_defense += 1
@@ -306,27 +306,31 @@ if kamer_10 == 1:
     print('Dapper loop je de kamer binnen.')
     print('Je loopt tegen een arch demon aan.')
 
-    demon_hit_damage = (demon_attack - player_defense)
+    demon_hit_damage = max(0, demon_attack - player_defense)
     if demon_hit_damage <= 0:
         print('Jij hebt een te goede verdediging voor de demon, hij kan je geen schade doen.')
     else:
-        demon_attack_amount = math.ceil(player_health / demon_hit_damage)
-        
-        player_hit_damage = (player_attack - demon_defense)
-        player_attack_amount = math.ceil(demon_health / player_hit_damage)
+        while player_health > 0 and demon_health > 0:
+            # Player's turn
+            demon_health -= max(0, player_attack - demon_defense)
+            demon_health = max(0, demon_health)
+            print(f'Je doet {max(0, player_attack - demon_defense)} schade aan de demon. Demon health is nu {demon_health}.')
 
-        if player_attack_amount < demon_attack_amount:
-            health_damage = player_attack_amount * demon_hit_damage
-            player_health -= health_damage
-            print(f'In {player_attack_amount} rondes versla je de demon.')
-            print(f'Je health is nu {player_health}.')
-            print('Je ziet een deur achter de demon.')
-            kamer_5 += 1
-        else:
-            print('Helaas is de demon te sterk voor je.')
-            print(player_health)
-            print('Game over.')
-            exit()
+            if demon_health <= 0:
+                print('Je hebt de demon verslagen!')
+                break
+            kamer_5 +=1
+
+            # Demon's turn
+            player_health -= max(0, demon_attack - player_defense)
+            player_health = max(0, player_health)
+            print(f'De demon doet {max(0, demon_attack - player_defense)} schade. Je health is nu {player_health}.')
+
+            if player_health <= 0:
+                print('Helaas is de demon te sterk voor je.')
+                print('Game over.')
+                break
+                exit()
 
 
 # === [kamer 5] === #
@@ -338,3 +342,5 @@ if kamer_5 == 1:
         print('met de sleutel open je de kist en versla je de Dungeon')
     else:
         print ('je kon de Dungeon niet verslan\n""""""""""GAMEOVER""""""""""')
+
+
