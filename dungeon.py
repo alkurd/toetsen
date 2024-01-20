@@ -156,6 +156,7 @@ if kamer_8 == 1:
             else:
                 print(f"Je hebt bij de eerste dobelsteen {dobelsteen_1} gerold")
                 print(f"Je hebt bij de tweede dobelsteen {dobelsteen_2} gerold")
+                print(f'Maar je health is vermindert met 1 punt!')
                 print(f'Je heb nu {antaal_rupee} rupes')
                 print(f'Met {antaal_rupee} rupes loop je weg')
                 spaler = input('welke kant ga je rechts naar de eerste deur of recht door naar het tweede deur?').lower()
@@ -194,6 +195,7 @@ if kamer_9 == 1:
 
 # === [kamer 3] === #
 if kamer_3 == 1:
+    
     items = ['schild', 'zwaard', 'sleutel']
     # items1 = list.pop('sleutel')
     # chosen_item = random.choice(items)
@@ -215,17 +217,17 @@ if kamer_3 == 1:
     elif antaal_rupee == 2:
         print('1 rupee voor elk van de items')
         player_choios = input('welke itms wil je hebbe? ').lower()
-        if player_choios == 'schil en zwaard' or 'zwaard en schild' or 'zwaard,schild' or 'schild,zwaard':
+        if player_choios == 'schild en zwaard':
             player_defense += 1
             antaal_rupee -= 1
             player_attack += 2
             antaal_rupee -= 1
-        elif player_choios == 'schild en sleutel' or 'sleutel en schild' or 'sleutel,schild' or 'schild,sleutel':
+        elif player_choios == 'schild en sleutel':
             player_defense += 1
             antaal_rupee -= 1
             sleutel += 1
             antaal_rupee -= 1
-        elif player_choios == 'sleutel en zwaard' or 'zwaard en sleutel' or 'zwaard,sleutel' or 'sleutel,zwaard':
+        elif player_choios == 'sleutel en zwaard':
             sleutel += 1
             antaal_rupee -= 1
             player_attack += 1
@@ -252,6 +254,9 @@ if kamer_3 == 1:
             print(f'Je pakt het {player_choios} op en houd het bij je.')
         elif player_choios == 'zwaard':
             player_attack += 2
+            antaal_rupee -= 1
+        elif player_choios == 'sleutel':
+            sleutel += 1
             antaal_rupee -= 1
             print(f'Je pakt het {player_choios} op en houd het bij je.')
             print(f'Dapper met je nieuwe {player_choios} loop je de kamer binnen.')
@@ -285,13 +290,44 @@ if kamer_4 ==1:
             print(f'In {player_attack_amount} rondes versla je de zombie.')
             print(f'Je health is nu {player_health}.')
             print('Je zie een deur achter het standbeeld.')
-            kamer_5 += 1
+            kamer_10 += 1
         else:
             print('Helaas is de zombie te sterk voor je.')
             print('Game over.')
             exit()
     print('')
     time.sleep(1)
+
+# == [kamer 10] == #
+if kamer_10 == 1:
+    demon_attack = 3
+    demon_defense = 1
+    demon_health = 5
+    print('Dapper loop je de kamer binnen.')
+    print('Je loopt tegen een arch demon aan.')
+
+    demon_hit_damage = (demon_attack - player_defense)
+    if demon_hit_damage <= 0:
+        print('Jij hebt een te goede verdediging voor de demon, hij kan je geen schade doen.')
+    else:
+        demon_attack_amount = math.ceil(player_health / demon_hit_damage)
+        
+        player_hit_damage = (player_attack - demon_defense)
+        player_attack_amount = math.ceil(demon_health / player_hit_damage)
+
+        if player_attack_amount < demon_attack_amount:
+            health_damage = player_attack_amount * demon_hit_damage
+            player_health -= health_damage
+            print(f'In {player_attack_amount} rondes versla je de demon.')
+            print(f'Je health is nu {player_health}.')
+            print('Je ziet een deur achter de demon.')
+            kamer_5 += 1
+        else:
+            print('Helaas is de demon te sterk voor je.')
+            print(player_health)
+            print('Game over.')
+            exit()
+
 
 # === [kamer 5] === #
 if kamer_5 == 1:
