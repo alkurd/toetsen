@@ -5,6 +5,7 @@ player_defense = 0
 player_health = 3
 sleutel = 0
 antaal_rupee = 0
+schild = 0
 
 kamer_2 = 0
 kamer_3 = 0
@@ -211,26 +212,45 @@ if kamer_3 == 1:
         if schild_zwaard == 'ja':
             sleutel += 1
             player_defense += 1
+            schild += 1
             antaal_rupee -= 1
             player_attack += 2
             antaal_rupee -= 1
     elif antaal_rupee == 2:
-        # print('1 rupee voor elk van de items')
-        player_choios = input('welke itms wil je hebbe? ').lower()
+        player_choios = input('welke 2 itms wil je hebbe? ').lower()
+        if player_choios == 'zwaard en schild':
+            player_defense += 1
+            schild += 1
+            antaal_rupee -= 1
+            player_attack += 2
+            antaal_rupee -= 1
         if player_choios == 'schild en zwaard':
             player_defense += 1
+            schild += 1
             antaal_rupee -= 1
             player_attack += 2
             antaal_rupee -= 1
         elif player_choios == 'schild en sleutel':
             player_defense += 1
+            schild += 1
+            antaal_rupee -= 1
+            sleutel += 1
+            antaal_rupee -= 1
+        elif player_choios == "sleutel en schild":
+            player_defense += 1
+            schild += 1
             antaal_rupee -= 1
             sleutel += 1
             antaal_rupee -= 1
         elif player_choios == 'sleutel en zwaard':
             sleutel += 1
             antaal_rupee -= 1
-            player_attack += 1
+            player_attack += 2
+            antaal_rupee -= 1
+        elif player_choios == 'zwaard en sleutel':
+            sleutel += 1
+            antaal_rupee -= 1
+            player_attack += 2
             antaal_rupee -= 1
         elif player_choios == 'nee':
             player_choios = input(f'Welke wil je dan hebben de {" of ".join(items)}? ')
@@ -239,8 +259,8 @@ if kamer_3 == 1:
                 antaal_rupee -= 1
             elif player_choios == 'schild':
                 player_defense += 1
+                schild += 1
                 antaal_rupee -= 1
-                print(f'Je pakt het {player_choios} op en houd het bij je.')
             elif player_choios == 'zwaard':
                 player_attack += 2
                 antaal_rupee -= 1
@@ -249,6 +269,7 @@ if kamer_3 == 1:
         print('1 rupee voor elk van de items')
         player_choios = input(f'Welke wil je hebben de {" of ".join(items)}? ')
         if player_choios == 'schild':
+            schild += 1
             player_defense += 1
             antaal_rupee -= 1
             print(f'Je pakt het {player_choios} op en houd het bij je.')
@@ -259,13 +280,40 @@ if kamer_3 == 1:
             sleutel += 1
             antaal_rupee -= 1
             print(f'Je pakt het {player_choios} op en houd het bij je.')
-            print(f'Dapper met je nieuwe {player_choios} loop je de kamer binnen.')
+        
     else:
         print('Je hebt niet genoeg rupees!')
-    print('Op naar de volgende deur.')
-    kamer_4 +=1
+    print('Op een verscheint nog een deur in het kamer')
+    spaler = input('Welke deur ga je paken de eerte of de tweede deur? ').lower()
+    if spaler == 'eerste deur':
+        kamer_4 +=1
+    elif spaler == 'tweede deur':
+        kamer_11 +=1
     print('')
     time.sleep(1)
+
+# === [kamer 11] === #
+if kamer_11 == 1:
+    print('Je dewt de deur open')
+    print('Je ziet een hele lange kamergevoeld met stambelden')
+    print('je loopt je stapte binde de kamer en de deuren sleuten van zicht achter ')
+    if schild == 1:
+        print('je loopt door en op eens beginne de stambelden pijlen te schiten tegen jou')
+        print('Je denkt gelukig heb ik de schild gekoscht ')
+        print('Anders was ik nu al dood')
+        print('Je ziet lange duer en je dwut hem open')
+        kamer_10 += 1
+    elif schild < 1:
+        print('Je loopt binnen')
+        print('je voelt dat de kamer is te rustig')
+        print('je begint door het kamer te lopen')
+        print('na enkel stapen bigenne de stambelden te bewgen')
+        print('ze beginnen jou te bekogelen met pijlen')
+        print('je probiert te renen maar ...')
+        print('je wordt geschoten in je been en in arm')
+        print('je denkt ik ben nu al dood\nIk heb geen kans meer')
+        print('""""""""""""""" Game Over """""""""""""""')
+        exit()
 
 # === [kamer 4] === #
 if kamer_4 ==1:
@@ -289,14 +337,26 @@ if kamer_4 ==1:
             player_health -= health_damig
             print(f'In {player_attack_amount} rondes versla je de zombie.')
             print(f'Je health is nu {player_health}.')
-            print('Je zie een deur achter het standbeeld.')
-            kamer_10 += 1
+            print('Je ziet een nog een deur verschijen na dat je de zombi bos verslaat.')
+            spaler = input('Welke deur pake je de nieuw deur  rechts of de eerst deur rechtdoor? ')
+            if spaler == 'rechtdoor':
+                kamer_10 += 1
+            elif spaler == 'rechts' :
+                kamer_12 += 1
         else:
             print('Helaas is de zombie te sterk voor je.')
             print('Game over.')
             exit()
     print('')
     time.sleep(1)
+
+# == [kamer 12] == #
+if kamer_12 == 1:
+    print('Zodra dat je de deur opent voel je gelijk dat je in de lucht hangt')
+    print('En hier bij val je tot je dood')
+    print(""""""""""""" Game Over """"""""""""")
+    exit()
+
 
 # == [kamer 10] == #
 if kamer_10 == 1:
@@ -311,17 +371,18 @@ if kamer_10 == 1:
         print('Jij hebt een te goede verdediging voor de demon, hij kan je geen schade doen.')
     else:
         while player_health > 0 and demon_health > 0:
-            # Player's turn
+            
             demon_health -= max(0, player_attack - demon_defense)
             demon_health = max(0, demon_health)
             print(f'Je doet {max(0, player_attack - demon_defense)} schade aan de demon. Demon health is nu {demon_health}.')
 
             if demon_health <= 0:
                 print('Je hebt de demon verslagen!')
+                kamer_5 +=1
+                print(player_attack)
+                print(player_defense)
+                print(player_health)
                 break
-            kamer_5 +=1
-
-            # Demon's turn
             player_health -= max(0, demon_attack - player_defense)
             player_health = max(0, player_health)
             print(f'De demon doet {max(0, demon_attack - player_defense)} schade. Je health is nu {player_health}.')
@@ -329,8 +390,9 @@ if kamer_10 == 1:
             if player_health <= 0:
                 print('Helaas is de demon te sterk voor je.')
                 print('Game over.')
-                break
                 exit()
+                
+                
 
 
 # === [kamer 5] === #
@@ -344,3 +406,24 @@ if kamer_5 == 1:
         print ('je kon de Dungeon niet verslan\n""""""""""GAMEOVER""""""""""')
 
 
+# if kamer_11 == 1:
+#     print('Je dewt de deur open')
+#     print('Je ziet een hele lange kamergevoeld met stambelden')
+#     print('je loopt je stapte binde de kamer en de deuren sleuten van zicht achter ')
+#     if schild == 1:
+#         print('je loopt door en op eens beginne de stambelden pijlen te schiten tegen jou')
+#         print('Je denkt gelukig heb ik de schild gekoscht ')
+#         print('Anders was ik nu al dood')
+#         print('Je ziet lange duer en je dwut hem open')
+#         kamer_4 += 1
+#     elif schild < 1:
+#         print('Je loopt binnen')
+#         print('je voelt dat de kamer is te rustig')
+#         print('je begint door het kamer te lopen')
+#         print('na enkel stapen bigenne de stambelden te bewgen')
+#         print('ze beginnen jou te bekogelen met pijlen')
+#         print('je probiert te renen maar ...')
+#         print('je wordt geschoten in je been en in arm')
+#         print('je denkt ik ben nu al dood\nIk heb geen kans meer')
+#         print('""""""""""""""" Game Over """""""""""""""')
+#         exit()
