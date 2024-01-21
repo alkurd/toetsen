@@ -6,6 +6,8 @@ player_health = 3
 sleutel = 0
 antaal_rupee = 0
 schild = 0
+bom = 0
+dolk = 0
 
 kamer_2 = 0
 kamer_3 = 0
@@ -100,6 +102,11 @@ if kamer_6 == 1:
 
             print(f'In {player_attack_amount} rondes versla je de zombie.')
             print(f'Je health is nu {player_health}.')
+            print('Na dat je de zombie verslaat krijg je een drop item')
+            print('"""""""""""""Dlek""""""""""""""')
+            dolk += 1
+            if dolk == 1:
+                player_attack += 1
             spaler = input('welke kant ga je rechts naar de eerste deur of recht door naar het tweede deur?').lower()
             if spaler == 'rechts':
                 kamer_8 +=1
@@ -176,7 +183,6 @@ if kamer_8 == 1:
 
 # == [kamer 9] == #
 if kamer_9 == 1:
-    kamer_3 += 1
     blessings = ['defense', 'health']
     random_blessing = random.choice(blessings)
     print('Je duwt de deur open en loopt een lange kamer binnen.')
@@ -192,6 +198,13 @@ if kamer_9 == 1:
         health_value = 2
         player_health += health_value
         print(f'Je voelt een genezende kracht die je gezondheid herstelt. Gezondheid +{health_value}')
+    print('je ziet twee deuren een is liks en de ander is rechtdoor')
+    spaler = input('door welke deur zou je gaan de likere of die rechtdoor')
+    if spaler == 'links':
+        kamer_3 += 1
+    elif spaler == 'rechtdoor':
+        kamer_4 += 1
+
 
 
 # === [kamer 3] === #
@@ -218,17 +231,17 @@ if kamer_3 == 1:
             antaal_rupee -= 1
     elif antaal_rupee == 2:
         player_choios = input('welke 2 itms wil je hebbe? ').lower()
-        if player_choios == 'zwaard en schild':
+        if player_choios == 'bom en schild':
             player_defense += 1
             schild += 1
             antaal_rupee -= 1
-            player_attack += 2
+            bom += 1
             antaal_rupee -= 1
-        if player_choios == 'schild en zwaard':
+        if player_choios == 'schild en bom':
             player_defense += 1
             schild += 1
             antaal_rupee -= 1
-            player_attack += 2
+            bom += 1
             antaal_rupee -= 1
         elif player_choios == 'schild en sleutel':
             player_defense += 1
@@ -242,15 +255,15 @@ if kamer_3 == 1:
             antaal_rupee -= 1
             sleutel += 1
             antaal_rupee -= 1
-        elif player_choios == 'sleutel en zwaard':
+        elif player_choios == 'sleutel en bom':
             sleutel += 1
             antaal_rupee -= 1
-            player_attack += 2
+            bom += 1
             antaal_rupee -= 1
-        elif player_choios == 'zwaard en sleutel':
+        elif player_choios == 'bom en sleutel':
             sleutel += 1
             antaal_rupee -= 1
-            player_attack += 2
+            bom += 1
             antaal_rupee -= 1
         elif player_choios == 'nee':
             player_choios = input(f'Welke wil je dan hebben de {" of ".join(items)}? ')
@@ -261,8 +274,8 @@ if kamer_3 == 1:
                 player_defense += 1
                 schild += 1
                 antaal_rupee -= 1
-            elif player_choios == 'zwaard':
-                player_attack += 2
+            elif player_choios == 'bom':
+                bom += 1
                 antaal_rupee -= 1
                 print(f'Je pakt het {player_choios} op en houd het bij je.')
     elif antaal_rupee == 1:
@@ -337,8 +350,15 @@ if kamer_4 ==1:
             player_health -= health_damig
             print(f'In {player_attack_amount} rondes versla je de zombie.')
             print(f'Je health is nu {player_health}.')
+            if bom == 1:
+                print('Na het versllan van de zombi bos zie je een kleine deur verscheinen')
+                print('Je proebeert de deurje open te krijgen maar je grijgt hem niet open!!')
+                spaler = input('je denkt denkt zou ik de bom gebruiken? ')
+                if spaler == 'gebruiken':
+                    player_attack +=2
+                    print('Je vindt zwaard je pakt hem op en je houdt hem bij je')
             print('Je ziet een nog een deur verschijen na dat je de zombi bos verslaat.')
-            spaler = input('Welke deur pake je de nieuw deur  rechts of de eerst deur rechtdoor? ')
+            spaler = input('Welke deur pake je de deur eerst rechts of de tweede deur rechtdoor? ')
             if spaler == 'rechtdoor':
                 kamer_10 += 1
             elif spaler == 'rechts' :
@@ -402,6 +422,10 @@ if kamer_5 == 1:
     print('Je loopt er naartoe.')
     if sleutel == 1:
         print('met de sleutel open je de kist en versla je de Dungeon')
+    elif bom == 1:
+        print('Je gooit de bom naar de kist ')
+        print('De kist kraakt open!!')
+        print('Je overleeft de Dungeon ')
     else:
         print ('je kon de Dungeon niet verslan\n""""""""""GAMEOVER""""""""""')
 
