@@ -2,7 +2,7 @@ import time, math, random
 
 player_attack = 1
 player_defense = 0
-player_health = 10
+player_health = 3
 sleutel = 0
 aantal_rupee = 0
 schild = 0
@@ -10,32 +10,19 @@ bom = 0
 dolk = 0
 bos_key = 0
 
-kamer_2 = 0
-kamer_3 = 0
-kamer_4 = 0
-kamer_5 = 0
-kamer_6 = 0
-kamer_7 = 0
-kamer_8 = 0
-kamer_9 = 0
-kamer_10 = 0
-kamer_11 = 0
-kamer_12 = 0
-kamer_13 = 0
-kamer_14 = 0
-kamer_15 = 0
+kamers = [0] * 16
 lange_trap = 0
 
 # === [kamer 1] === #
 print('Door de twee grote deuren loop je een gang binnen.')
 print('Het ruikt hier muf en vochtig.')
 print('Je ziet een deur voor je.')
-kamer_7 += 1
+kamers [7] += 1
 print('')
 time.sleep(1)
 
 # === [kamer 7] === #
-if kamer_7 == 1:
+if kamers [7] == 1:
     betoverde_kamer = random.randint(1,10)
     print('Je loopt binne je voet magie in de lucht')
     print('Blijkbaar heeft een euwen oud tovenaar heeft de kamer  betoverd')
@@ -48,12 +35,12 @@ if kamer_7 == 1:
     print('In het kamer zie je twee deuren elke met zijn numer der boven op 2/8.')
     spaler_1 = input('Je denkt welke deur nu? 2 of 8? ').lower()
     if spaler_1 == '8':
-        kamer_8 +=1
+        kamers [8] +=1
     elif spaler_1 == '2':
-        kamer_2 +=1
+        kamers [2] +=1
 
 # === [kamer 2] === #
-if kamer_2 == 1:
+if kamers [2] == 1:
     RANDOM_0 = random.randint(10, 25)
     RANDOM_01 = random.randint(10, 25)
     RANDOM_1 = random.randint(-5, 76)
@@ -75,15 +62,15 @@ if kamer_2 == 1:
     print('Je ziet nu twee deuren elke met zijn nummer der boven op 6/8.')
     spaler = input('Je denkt welke deur nu? 6 of 8? ').lower()
     if spaler == '8' :
-        kamer_8 +=1
+        kamers [8] +=1
     elif spaler == '6':
-        kamer_6 +=1
+        kamers [6] +=1
     # time.sleep(1)
         print('')
     time.sleep(1)
 
 # === [kamer 6] === #
-if kamer_6 == 1:
+if kamers [6] == 1:
     zombie_attack = 1
     zombie_defense = 0
     zombie_health = 2
@@ -109,12 +96,12 @@ if kamer_6 == 1:
             print('"""""""""""""Sleutel""""""""""""""')
             sleutel += 1
             if lange_trap == 1:
-                print('Je ziet nu twee deuren elke met zijn nummer der boven op 3/8/, en een zonder nummer .')
+                print('Je ziet nu drie deuren elke met zijn nummer der boven op 3/8/, en een zonder nummer .')
                 spaler = input('Je denkt welke deur nu? 3 of 8 of die zonder nummer ? ').lower()
                 if spaler == '8':
-                    kamer_8 +=1
+                    kamers [8] +=1
                 elif spaler == '3':
-                    kamer_3 +=1    
+                    kamers [3] +=1    
                 elif spaler == 'zonder nummer':
                     print('Je deuwt de deur open ')
                     print('Je ziet een super lange trap')
@@ -122,21 +109,21 @@ if kamer_6 == 1:
                     if spaler == 'ja':
                         print('Je begint de trap op te lopen')
                         print('aan het einde van de trap zie je een deur met nummer 15 je deut de deur open')
-                        kamer_15 += 1
+                        kamers [15] += 1
                     else:
                         print('Je loopt terug naar de kamer 6')
                         spaler = input('Je kist tussen de deuren 3/8! ')
                         if spaler == '3':
-                            kamer_3 += 1
+                            kamers [3] += 1
                         elif spaler == '8':
-                            kamer_8 += 1
+                            kamers [8] += 1
             else:
                 print('Je ziet nu twee deuren elke met zijn nummer der boven op 3/8.')
                 spaler = input('Je denkt welke deur nu? 3 of 8? ').lower()
                 if spaler == '8':
-                    kamer_8 +=1
+                    kamers [8] +=1
                 elif spaler == '3':
-                    kamer_3 +=1  
+                    kamers [3] +=1  
 
         else:
             print('Helaas is de zombie te sterk voor je.')
@@ -146,7 +133,7 @@ print('')
 time.sleep(1)
 
 # ==[kamer 15]== #
-if kamer_15 == 1:
+if kamers [15] == 1:
     print('Je loopt binne je ziet een balista in het miden van de kamer gericht op een raam')
     print('Naast de het raam is een deur met nummer 10 boven op ')
     print('Je kijk eerst uit het raam en je ziet een arch demon binne zitten')
@@ -156,13 +143,13 @@ if kamer_15 == 1:
         print('Met een hard knalende geluid wordt een groote pijl tegen de arch demon geschoten')
         print('De archt demon schriuet van pijn en gaat dood')
         print('en de deur daar naast brast open')
-        kamer_5 += 1
+        kamers [5] += 1
     else:
         print('Je deut de deur met naar de arch demon open ')
-        kamer_10 += 1
+        kamers [10] += 1
 
 # == [kamer 8] == #
-if kamer_8 == 1:
+if kamers [8] == 1:
     dobelsteen_1 = random.randint(1,6)
     dobelsteen_2 = random.randint(1,6)
     print('Je de duwt de deur open en loopt een lange kamer binne')
@@ -182,11 +169,11 @@ if kamer_8 == 1:
             print('Je ziet nu drie deuren elke met zijn nummer der boven op 3/9/14.')
             spaler = input('Je denkt welke deur nu? 3 of 9 of 14? ').lower()
             if spaler == '3':
-                kamer_3 +=1
+                kamers [3] +=1
             elif spaler == '9':
-                kamer_9 +=1
+                kamers [9] +=1
             elif spaler == '14':
-                kamer_14 += 1
+                kamers [14] += 1
         elif dobelsteen_1 + dobelsteen_2 == 7:
             print(f"Je hebt bij de eerste dobelsteen {dobelsteen_1} gerold")
             print(f"Je hebt bij de tweede dobelsteen {dobelsteen_2} gerold")
@@ -197,11 +184,11 @@ if kamer_8 == 1:
             print('Je ziet nu drie deuren elke met zijn nummer der boven op 3/9/14.')
             spaler = input('Je denkt welke deur nu? 3 of 9 of 14? ').lower()
             if spaler == '3':
-                kamer_3 +=1
+                kamers [3] +=1
             elif spaler == '9':
-                kamer_9 +=1
+                kamers [9] +=1
             elif spaler == '14':
-                kamer_14 += 1
+                kamers [14] += 1
         elif dobelsteen_1 + dobelsteen_2 < 7:
             player_health -= 1
             if player_health <= 0:
@@ -216,31 +203,31 @@ if kamer_8 == 1:
                 print('Je ziet nu drie deuren elke met zijn nummer der boven op 3/9/14.')
                 spaler = input('Je denkt welke deur nu? 3 of 9 of 14? ').lower()
                 if spaler == '3':
-                    kamer_3 +=1
+                    kamers [3] +=1
                 elif spaler == '9':
-                    kamer_9 +=1
+                    kamers [9] +=1
                 elif spaler == '14':
-                    kamer_14 += 1
+                    kamers [14] += 1
     elif black_goblin == 'nee':
         print('Je ziet nu drie deuren elke met zijn nummer der boven op 3/9/14.')
         spaler = input('Je denkt welke deur nu? 3 of 9 of 14? ').lower()
         if spaler == '3':
-            kamer_3 +=1
+            kamers [3] +=1
         elif spaler == '9':
-            kamer_9 +=1
+            kamers [9] +=1
         elif spaler == '14':
-            kamer_14 += 1
+            kamers [14] += 1
 
 # == [kamer 14] == #
-if kamer_14 == 1:
+if kamers [14] == 1:
     print('je dwut de deur open en loopt binnen')
     print('Mindden in de kamer zweveft een zwarte sleutel')
     print ('je pakt hem op en je houdt hem bij')
     bos_key += 1
-    kamer_9 += 1
+    kamers [9] += 1
 
 # == [kamer 9] == #
-if kamer_9 == 1:
+if kamers [9] == 1:
     blessings = ['defense', 'health']
     random_blessing = random.choice(blessings)
     print('Je duwt de deur open en loopt een lange kamer binnen.')
@@ -259,14 +246,14 @@ if kamer_9 == 1:
     print('Je ziet nu twee deuren elke met zijn nummer der boven op 3/4.')
     spaler = input('Je denkt welke deur nu? 3 of 4? ').lower()
     if spaler == '3':
-        kamer_3 += 1
+        kamers [3] += 1
     elif spaler == '4':
-        kamer_4 += 1
+        kamers [4] += 1
 
 
 
 # === [kamer 3] === #
-if kamer_3 == 1:
+if kamers [3] == 1:
     
     items = ['schild', 'dolk', 'bom']
     # items1 = list.pop('sleutel')
@@ -357,14 +344,14 @@ if kamer_3 == 1:
         print('Je ziet nu drie deuren elke met zijn nummer der boven op 4/11.')
     spaler = input('Je denkt welke deur nu? 4 of 11? ').lower()
     if spaler == '4':
-        kamer_4 +=1
+        kamers [4] +=1
     elif spaler == '11':
-        kamer_11 +=1
+        kamers [11] +=1
     print('')
     time.sleep(1)
 
 # === [kamer 11] === #
-if kamer_11 == 1:
+if kamers [11] == 1:
     print('Je dewt de deur open')
     print('Je ziet een hele lange kamergevoeld met stambelden')
     print('je loopt je stapte binde de kamer en de deuren sleuten van zicht achter ')
@@ -373,7 +360,7 @@ if kamer_11 == 1:
         print('Je denkt gelukig heb ik de schild gekoscht ')
         print('Anders was ik nu al dood')
         print('Je ziet lange duer en je dwut hem open')
-        kamer_10 += 1
+        kamers [10] += 1
     elif schild < 1:
         print('Je loopt binnen')
         print('je voelt dat de kamer is te rustig')
@@ -387,7 +374,7 @@ if kamer_11 == 1:
         exit()
 
 # === [kamer 4] === #
-if kamer_4 ==1:
+if kamers [4] ==1:
     zombie_bos_attack = 2
     zombie_bos_defense = 0
     zombie_bos_health = 3
@@ -400,7 +387,7 @@ if kamer_4 ==1:
         print ("Je ziet drie deuren elke met zijn nummer der boven op 10/12/13")
         spaler = input('Je denkt welke deur nu? 10 of 12 of 13? ').lower()
         if spaler == '12' :
-            kamer_12 += 1
+            kamers [12] += 1
         elif spaler == '13' and bom == 1 :
             print('Je makt de hek open met een bom naar toe te gooien')
             player_attack += 2
@@ -409,25 +396,25 @@ if kamer_4 ==1:
                 spaler = input('Je denkt welke deur nu? 10 of 12? ')
                 if spaler == '10':
                     print('Na dat je de zwaard hebt gepakt je loopt naar de deur naast je met nummer 10 ')
-                    kamer_10 += 1
+                    kamers [10] += 1
                 elif spaler == '12':
-                    kamer_12 += 1
+                    kamers [12] += 1
             elif bos_key == 0 :
                 print('Je loopt naar deur rechts van je met nummer 10 ')
                 print('Je probeert de deur open te maken maar krijg je hem toch niet open')
                 print('Dus je loopt naar de ander deur met nummer 12')
                 print('Je dwut de deur open')
-                kamer_12 +=1
+                kamers [12] +=1
         elif spaler == '10':
             if bos_key == 1:
                 print('Je dewt de deur open')
-                kamer_10 += 1
+                kamers [10] += 1
             elif bos_key == 0 and bom == 1 :
                 print('Je probeert de deur open te maken maar het lukt je niet')
                 print('Je loopt paar stapen naar acht en gooit met de bom naar de deur!')
                 print('......Boooom!!!!')
                 print('De deur gaat open en je loopt naar binne')
-                kamer_10 += 1
+                kamers [10] += 1
     else:
         zombie_bos_attack_amount = math.ceil(player_health / zombie_bos_hit_damage)
         
@@ -441,7 +428,7 @@ if kamer_4 ==1:
             print ("Je ziet drie deuren elke met zijn nummer er boven op 10/12/13")
             spaler = input('Je denkt welke deur nu? 10 of 12 of 13? ').lower()  
             if spaler == '12' :
-                kamer_12 += 1
+                kamers [12] += 1
             elif spaler == '13' and bom == 1 :
                 print('Je makt de hek open met een bom naar toe te gooien')
                 print('Je vindt binne een zwaard je pakt hem houdt hem bij je')
@@ -452,25 +439,25 @@ if kamer_4 ==1:
                     spaler = input('Je denkt welke deur nu? 10 of 12? ')
                     if spaler == '10':
                         print('Na dat je de zwaard hebt gepakt je loopt naar de deur naast je met nummer 10 ')
-                        kamer_10 += 1
+                        kamers [10] += 1
                     elif spaler == '12':
-                        kamer_12 += 1
+                        kamers [12] += 1
                 elif bos_key == 0 :
                     print('Je loopt naar deur rechts van je met nummer 10 ')
                     print('Je probeert de deur open te maken maar krijg je hem toch niet open')
                     print('Dus je loopt naar de ander deur met nummer 12')
                     print('Je dwut de deur open')
-                    kamer_12 +=1
+                    kamers [12] +=1
             elif spaler == '10':
                 if bos_key == 1:
                     print('Je dewt de deur open')
-                    kamer_10 += 1
+                    kamers [10] += 1
                 elif bos_key == 0 and bom == 1 :
                     print('Je probeert de deur open te maken maar het lukt je niet')
                     print('Je loopt paar stapen naar acht en gooit met de bom naar de deur!')
                     print('......Boooom!!!!')
                     print('De deur gaat open en je loopt naar binne')
-                    kamer_10 += 1    
+                    kamers [10] += 1    
         else:
             print('Helaas is de zombie te sterk voor je.')
             print('Game over.')
@@ -480,7 +467,7 @@ if kamer_4 ==1:
 
 
 # == [kamer 12] == #
-if kamer_12 == 1:
+if kamers [12] == 1:
     print('Zodra dat je de deur opent voel je gelijk dat je in de lucht hangt')
     print('En hier bij val je tot je dood')
     print(""""""""""""" Game Over """"""""""""")
@@ -488,7 +475,7 @@ if kamer_12 == 1:
 
 
 # == [kamer 10] == #
-if kamer_10 == 1:
+if kamers [10] == 1:
     demon_attack = 3
     demon_defense = 1
     demon_health = 5
@@ -507,7 +494,7 @@ if kamer_10 == 1:
 
             if demon_health <= 0:
                 print('Je hebt de demon verslagen!')
-                kamer_5 +=1
+                kamers [5] +=1
                 print(player_attack)
                 print(player_defense)
                 print(player_health)
@@ -522,7 +509,7 @@ if kamer_10 == 1:
                 exit()
 
 # === [kamer 5] === #
-if kamer_5 == 1:
+if kamers [5] == 1:
     print('Voorzichtig open je de deur, je wilt niet nog een zombie tegenkomen.')
     print('Tot je verbazig zie je een schatkist in het midden van de kamer staan.')
     print('Je loopt er naartoe.')
